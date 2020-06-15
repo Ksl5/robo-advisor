@@ -1,6 +1,8 @@
 # app/robo_advisor.py
 import requests
 import json
+import datetime
+
 
 
 # Info inputs
@@ -16,6 +18,10 @@ parsed_response = json.loads(response.text)
 #parsed_response["Meta Data"].keys
 #parsed_response["Meta Data"]["3. Last Refreshed"]
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+#formatted_last_refreshed = datetime.last_refreshed()
+now = datetime.datetime.now()
+
+
 
 
 
@@ -31,7 +37,7 @@ print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
-print("REQUEST AT: 2018-02-20 02:00pm") #datetime module
+print("REQUEST AT: " + now.strftime('%Y-%m-%d %H:%M:%S %p'))
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print("LATEST CLOSE: $100,000.00")
