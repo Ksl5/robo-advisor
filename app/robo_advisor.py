@@ -18,8 +18,8 @@ parsed_response = json.loads(response.text)
 #parsed_response["Meta Data"].keys
 #parsed_response["Meta Data"]["3. Last Refreshed"]
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
-#formatted_last_refreshed = datetime.last_refreshed()
 now = datetime.datetime.now()
+selected_symbol = parsed_response["Meta Data"]["2. Symbol"]
 
 
 
@@ -34,7 +34,7 @@ now = datetime.datetime.now()
 
 
 print("-------------------------")
-print("SELECTED SYMBOL: XYZ")
+print("SELECTED SYMBOL: " + selected_symbol)
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
 print("REQUEST AT: " + now.strftime('%Y-%m-%d %H:%M:%S %p'))
