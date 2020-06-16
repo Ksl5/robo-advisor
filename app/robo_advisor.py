@@ -26,9 +26,16 @@ tsd = parsed_response["Time Series (Daily)"]
 dates = list(tsd.keys())
 latest_day = dates[0] #>"2020-06-15"
 now = datetime.datetime.now()
+
+high_prices = []
+for date in dates:
+    high_price = tsd[date]["2. high"]
+    high_prices.append(float(high_price))
+
 selected_symbol = parsed_response["Meta Data"]["2. Symbol"]
 latest_close = tsd [latest_day]["4. close"]
-recent_high = tsd[latest_day]["2. high"]
+recent_high = max(high_prices)
+#recent_high = tsd[latest_day]["2. high"]
 recent_low = tsd[latest_day]["3. low"]
 
 
@@ -48,11 +55,8 @@ print("REQUEST AT: " + now.strftime('%Y-%m-%d %H:%M:%S %p'))
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print("LATEST CLOSE: " + to_usd(float(latest_close)))
-#print("LATEST CLOSE: $100,000.00")
 print("RECENT HIGH: " + to_usd(float(recent_high)))
-#print("RECENT HIGH: $101,000.00")
 print("RECENT LOW: " + to_usd(float(recent_low)))
-#print("RECENT LOW: $99,000.00")
 print("-------------------------")
 print("RECOMMENDATION: BUY!") #>TODO
 print("RECOMMENDATION REASON: TODO") #>TODO
