@@ -2,6 +2,8 @@
 import requests
 import json
 import datetime
+import os
+import csv
 def to_usd(my_price):
     return f"${my_price:,.2f}" #> $12,000.71
 
@@ -42,19 +44,24 @@ recent_high = max(high_prices)
 #recent_high = tsd[latest_day]["2. high"]
 recent_low = min(low_prices)
 
-
-
 #breakpoint()
 
-
-
 # info outputs
+#csv_file_path = "data/prices.csv" # stock prices filepath
+csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
 
+with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
+    writer = csv.DictWriter(csv_file, fieldnames=["city", "name"])
+    writer.writeheader() # uses fieldnames set above
+    writer.writerow({"city": "New York", "name": "Yankees"})
+    writer.writerow({"city": "New York", "name": "Mets"})
+    writer.writerow({"city": "Boston", "name": "Red Sox"})
+    writer.writerow({"city": "New Haven", "name": "Ravens"})
 
 print("-------------------------")
 print("SELECTED SYMBOL: " + selected_symbol)
 print("-------------------------")
-print("REQUESTING STOCK MARKET DATA...")
+print("REQUESTING STOCK MARKET DATA")
 print("REQUEST AT: " + now.strftime('%Y-%m-%d %H:%M:%S %p'))
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
@@ -64,6 +71,7 @@ print("RECENT LOW: " + to_usd(float(recent_low)))
 print("-------------------------")
 print("RECOMMENDATION: BUY!") #>TODO
 print("RECOMMENDATION REASON: TODO") #>TODO
+print(f"WRITING DATA TO CSV: {csv_file_path}...")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
