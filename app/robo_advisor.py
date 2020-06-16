@@ -28,15 +28,19 @@ latest_day = dates[0] #>"2020-06-15"
 now = datetime.datetime.now()
 
 high_prices = []
+low_prices = []
 for date in dates:
     high_price = tsd[date]["2. high"]
     high_prices.append(float(high_price))
+    low_price = tsd[date]["3. low"]
+    low_prices.append(float(low_price))
+
 
 selected_symbol = parsed_response["Meta Data"]["2. Symbol"]
 latest_close = tsd [latest_day]["4. close"]
 recent_high = max(high_prices)
 #recent_high = tsd[latest_day]["2. high"]
-recent_low = tsd[latest_day]["3. low"]
+recent_low = min(low_prices)
 
 
 
