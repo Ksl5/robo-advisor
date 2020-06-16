@@ -19,13 +19,17 @@ parsed_response = json.loads(response.text)
 #parsed_response["Meta Data"]
 #parsed_response["Meta Data"].keys
 #parsed_response["Meta Data"]["3. Last Refreshed"]
-latest_day = "2020-06-15"
+
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+
+tsd = parsed_response["Time Series (Daily)"]
+dates = list(tsd.keys())
+latest_day = dates[0] #>"2020-06-15"
 now = datetime.datetime.now()
 selected_symbol = parsed_response["Meta Data"]["2. Symbol"]
-latest_close = parsed_response["Time Series (Daily)"][latest_day]["4. close"]
-recent_high = parsed_response["Time Series (Daily)"][latest_day]["2. high"]
-recent_low = parsed_response["Time Series (Daily)"][latest_day]["3. low"]
+latest_close = tsd [latest_day]["4. close"]
+recent_high = tsd[latest_day]["2. high"]
+recent_low = tsd[latest_day]["3. low"]
 
 
 
